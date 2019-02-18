@@ -1,0 +1,5 @@
+handler: handler.hello
+events:
+  - http:
+      path: badetemp
+      method: get

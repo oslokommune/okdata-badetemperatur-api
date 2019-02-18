@@ -1,0 +1,10 @@
+handler: handler.hello
+events:
+  - stream:
+    type: kinesis
+    arn:
+      Fn::Join:
+        - ':'
+        - - 'arn:aws:kinesis:'
+          - Ref: AWS::AccountId
+          - 'stream/green.badeball-xyz.incoming.v1.json'
