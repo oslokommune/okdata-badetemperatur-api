@@ -1,5 +1,5 @@
 
-service: badetemp-api
+service: badeball-api
 
 provider:
   name: aws

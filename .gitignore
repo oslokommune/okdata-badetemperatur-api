@@ -27,3 +27,9 @@ env/
 
 # Node
 node_modules/
+
+# Tox
+.tox
+
+#Pycache
+__pycache__

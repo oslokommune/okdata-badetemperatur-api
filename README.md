@@ -1,4 +1,4 @@
-Event Collector
+Badeball Api
 ========================
 
 Lambda functions to collect and expose water-temperatures in Oslo.

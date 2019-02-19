@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(
-    name="badetemp-api",
+    name="badeball-api",
     version="0.0.1",
     author="Origo Dataplattform",
     author_email="dataplattform@oslo.kommune.no",
