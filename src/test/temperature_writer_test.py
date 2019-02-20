@@ -1,7 +1,7 @@
 import unittest
 import boto3
-import src.main.dynamo_db_writer as dynamo_db_writer
-import src.test.test_data.dynamo_db_writer_test_data as test_data
+import src.main.temperature_writer as temperature_writer
+import src.test.test_data.temperature_writer_test_data as test_data
 
 from moto import mock_dynamodb2
 
@@ -27,7 +27,7 @@ class Tester(unittest.TestCase):
         create_table(table_name)
         badeball_table = dynamodb_table(table_name)
 
-        dynamo_db_writer.handle_event(test_data.kinesis_event, None)
+        temperature_writer.handle_event(test_data.kinesis_event, None)
 
         items = badeball_table.scan()
         assert test_data.item_1 and test_data.item_2 in items['Items']
@@ -39,13 +39,13 @@ class Tester(unittest.TestCase):
         create_table(table_name)
         badeball_table = dynamodb_table(table_name)
 
-        dynamo_db_writer.put_item(test_data.item_1)
+        temperature_writer.put_item(test_data.item_1)
 
         assert test_data.item_1 in badeball_table.scan()['Items']
 
     def test_float_to_decimal(self):
         item = test_data.event_data_1['data']
-        new_item = dynamo_db_writer.float_to_decimal(item)
+        new_item = temperature_writer.float_to_decimal(item)
         for i in range(0, len(item['sensors'])):
             self.assertEqual(
                 float(new_item['sensors'][i]['value']),
@@ -54,7 +54,7 @@ class Tester(unittest.TestCase):
 
     def test_b64_to_obj(self):
         self.assertDictEqual(
-            dynamo_db_writer.b64_to_obj(test_data.b64_encoded_obj),
+            temperature_writer.b64_to_obj(test_data.b64_encoded_obj),
             test_data.obj_decoded
         )
 

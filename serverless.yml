@@ -14,7 +14,7 @@ provider:
     - { 'Fn::Join': [':', ['arn:aws:iam:', { Ref: 'AWS::AccountId' }, 'policy/badeball-api-policy']] }
 
 functions:
-  getBadetemp: ${file(serverless/functions/getBadetemp.yml)}
+  getAllTemperatures: ${file(serverless/functions/getAllTemperatures.yml)}
 
 package:
   exclude:
