@@ -50,7 +50,7 @@ def transform_item(item):
 
 def extract_temperature(sensor_value_list):
     temperature = list(
-        filter(lambda sensor_value: sensor_value['type'].lower() == 'Temperature'.lower(),sensor_value_list))
+        filter(lambda sensor_value: sensor_value['type'].lower() == 'temperature', sensor_value_list))
 
     return float(temperature.pop()['value'])
 
