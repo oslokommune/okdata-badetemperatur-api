@@ -1,0 +1,5 @@
+handler: src/main/temperature_reader.get_all_temperatures
+events:
+  - http:
+      path: temperatures
+      method: get
