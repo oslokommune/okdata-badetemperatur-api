@@ -4,7 +4,7 @@ import json
 from boto3.dynamodb.conditions import Key
 
 dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
-temperature_table = dynamodb.Table('badeball-latest')
+sensor_data_table = dynamodb.Table('badeball-latest')
 
 
 def get_all_temperatures(event, context):
@@ -27,14 +27,14 @@ def get_temperature(event, context):
 
 
 def query_for_item(key):
-    item = temperature_table.query(
+    item = sensor_data_table.query(
         KeyConditionExpression=Key('deviceId').eq(key)
     )
     return item['Items'].pop()
 
 
 def scan_for_items():
-    items = temperature_table.scan()['Items']
+    items = sensor_data_table.scan()['Items']
     return items
 
 

@@ -25,11 +25,11 @@ class Tester(unittest.TestCase):
     def test_handle_event(self):
         table_name = 'badeball-latest'
         create_table(table_name)
-        badeball_table = dynamodb_table(table_name)
+        sensor_data_table = dynamodb_table(table_name)
 
         sensor_data_writer.handle_event(test_data.kinesis_event, None)
 
-        items = badeball_table.scan()
+        items = sensor_data_table.scan()
         assert test_data.item_1 and test_data.item_2 in items['Items']
 
 
@@ -37,11 +37,11 @@ class Tester(unittest.TestCase):
     def test_put_item(self):
         table_name = 'badeball-latest'
         create_table(table_name)
-        badeball_table = dynamodb_table(table_name)
+        sensor_data_table = dynamodb_table(table_name)
 
         sensor_data_writer.put_item(test_data.item_1)
 
-        assert test_data.item_1 in badeball_table.scan()['Items']
+        assert test_data.item_1 in sensor_data_table.scan()['Items']
 
     def test_float_to_decimal(self):
         item = test_data.event_data_1['data']

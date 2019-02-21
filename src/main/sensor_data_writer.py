@@ -5,7 +5,7 @@ from copy import deepcopy
 from decimal import Decimal
 
 dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
-temperature_table = dynamodb.Table('badeball-latest')
+sensor_data_table = dynamodb.Table('badeball-latest')
 
 
 def handle_event(event, context):
@@ -18,7 +18,7 @@ def handle_event(event, context):
 
 
 def put_item(item):
-    response = temperature_table.put_item(
+    response = sensor_data_table.put_item(
         Item=item
     )
     return response

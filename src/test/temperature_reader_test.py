@@ -14,10 +14,10 @@ def create_table(table_name, item_list):
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
-    temperature_table = dynamodb.Table(table_name)
+    sensor_data_table = dynamodb.Table(table_name)
 
     for item in item_list:
-        temperature_table.put_item(Item=item)
+        sensor_data_table.put_item(Item=item)
 
 
 class Tester(unittest.TestCase):
