@@ -37,12 +37,7 @@ item_2_transformed = {
     'unit': 'C'
 }
 
-get_all_temperatures_ok_response = {
-    'statusCode': 200,
-    'body': json.dumps([item_1_transformed, item_2_transformed])
-}
-
-get_all_temperatures_http_event = {
+http_event_no_path_params = {
     'resource': '/',
     'path': '/',
     'httpMethod': 'GET',
@@ -53,4 +48,29 @@ get_all_temperatures_http_event = {
     'requestContext': {},
     'body': None,
     'isBase64Encoded': False
+}
+
+get_all_temperatures_ok_response = {
+    'statusCode': 200,
+    'body': json.dumps([item_1_transformed, item_2_transformed])
+}
+
+http_event_with_path_params = {
+    'resource': '/',
+    'path': '/',
+    'httpMethod': 'GET',
+    'headers': {},
+    'queryStringParameters': None,
+    'pathParameters': {
+        'name': item_1['deviceId']
+    },
+    'stageVariables': None,
+    'requestContext': {},
+    'body': None,
+    'isBase64Encoded': False
+}
+
+get_temperature_ok_response = {
+    'statusCode': 200,
+    'body': json.dumps(item_1_transformed)
 }

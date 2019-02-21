@@ -27,8 +27,25 @@ class Tester(unittest.TestCase):
         table_name = 'badeball-latest'
         create_table(table_name, [test_data.item_1, test_data.item_2])
 
-        response = temperature_reader.get_all_temperatures(test_data.get_all_temperatures_http_event, None)
+        response = temperature_reader.get_all_temperatures(test_data.http_event_no_path_params, None)
         self.assertDictEqual(response, test_data.get_all_temperatures_ok_response)
+
+    @mock_dynamodb2
+    def test_get_temperature(self):
+        table_name = 'badeball-latest'
+        create_table(table_name, [test_data.item_1, test_data.item_2])
+
+        response = temperature_reader.get_temperature(test_data.http_event_with_path_params, None)
+        self.assertDictEqual(response, test_data.get_temperature_ok_response)
+
+
+    @mock_dynamodb2
+    def test_query_for_item(self):
+        table_name = 'badeball-latest'
+        create_table(table_name, [test_data.item_1, test_data.item_2])
+
+        item = temperature_reader.query_for_item(test_data.item_1['deviceId'])
+        self.assertDictEqual(item, test_data.item_1)
 
     @mock_dynamodb2
     def test_scan_for_items(self):
