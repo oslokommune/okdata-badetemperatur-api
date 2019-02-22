@@ -1,0 +1,75 @@
+openapi: "3.0.1"
+info:
+  title: "dev-badeball-api"
+  version: "2019-02-22T14:03:26Z"
+servers:
+- url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
+  variables:
+    basePath:
+      default: "/dev"
+paths:
+  /temperatures/{name}:
+    get:
+      description: "Returns temperature measurement objects for a single sensor."
+      parameters:
+      - name: "name"
+        in: "path"
+        description: "Identifier for sensor."
+        required: true
+        schema:
+          type: "string"
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasurementObject"
+  /temperatures:
+    get:
+      description: "Returns temperature measurement objects for sensors."
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MeasurementObjectList"
+components:
+  schemas:
+    MeasurementObject:
+      title: "Measurement object"
+      type: "object"
+      properties:
+        unit:
+          type: "string"
+        name:
+          type: "string"
+        location:
+          type: "string"
+        measureTime:
+          type: "string"
+          format: "date-time"
+        value:
+          type: "number"
+          format: "float"
+      description: "Measurement from a single sensor."
+    MeasurementObjectList:
+      type: "array"
+      description: "Measurements from all sensors."
+      items:
+        title: "Measurement object"
+        type: "object"
+        properties:
+          unit:
+            type: "string"
+          name:
+            type: "string"
+          location:
+            type: "string"
+          measureTime:
+            type: "string"
+            format: "date-time"
+          value:
+            type: "number"
+            format: "float"

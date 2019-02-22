@@ -14,8 +14,8 @@ provider:
     - { 'Fn::Join': [':', ['arn:aws:iam:', { Ref: 'AWS::AccountId' }, 'policy/badeball-api-policy']] }
 
 functions:
-  getAllTemperatures: ${file(serverless/functions/getAllTemperatures.yml)}
-  getTemperature: ${file(serverless/functions/getAllTemperatures.yml)}
+  getAllTemperatures: ${file(serverless/functions/getTemperatures.yml)}
+  getTemperature: ${file(serverless/functions/getTemperature.yml)}
   writeSensordata: ${file(serverless/functions/writeSensordata.yml)}
 
 package:
@@ -31,4 +31,4 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: non-linux
-  #documentation: ${file(serverless/documentation/documentation.yaml)}
+  documentation: ${file(serverless/documentation/documentation.yml)}

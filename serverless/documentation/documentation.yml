@@ -1,0 +1,13 @@
+version: 0.1.0
+description: Api for extracting data from water temperature sensors in Oslo.
+models:
+  -
+    name: MeasurementObject
+    description: Measurement from a single sensor.
+    contentType: application/json
+    schema: ${file(serverless/documentation/schemas/measurementObject.json)}
+  -
+    name: MeasurementObjectList
+    description: Measurements from all sensors.
+    contentType: application/json
+    schema: ${file(serverless/documentation/schemas/measurementObjectList.json)}

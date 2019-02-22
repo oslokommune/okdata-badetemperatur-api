@@ -6,3 +6,4 @@ events:
       parameters:
         paths:
           name: true
+      documentation: ${file(serverless/documentation/getTemperature.yml)}

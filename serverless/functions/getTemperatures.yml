@@ -3,3 +3,4 @@ events:
   - http:
       path: temperatures
       method: get
+      documentation: ${file(serverless/documentation/getTemperatures.yml)}
