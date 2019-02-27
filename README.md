@@ -10,6 +10,7 @@ Lambda functions to collect and expose water-temperatures in Oslo.
 ```
 sls plugin install -n serverless-python-requirements
 sls plugin install -n serverless-aws-documentation
+sls plugin install -n serverless-pseudo-parameters
 ```
 
 ## Running tests

@@ -44,7 +44,7 @@ class Tester(unittest.TestCase):
         assert test_data.item_1 in sensor_data_table.scan()['Items']
 
     def test_float_to_decimal(self):
-        item = test_data.event_data_1['data']
+        item = test_data.event_data_1
         new_item = sensor_data_writer.float_to_decimal(item)
         for i in range(0, len(item['sensors'])):
             self.assertEqual(

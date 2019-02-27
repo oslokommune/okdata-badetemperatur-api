@@ -33,3 +33,6 @@ node_modules/
 
 #Pycache
 __pycache__
+
+# Mac crap
+.DS_Store

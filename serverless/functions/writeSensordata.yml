@@ -1,10 +1,3 @@
-handler: handler.hello
+handler: src/main/sensor_data_writer.handle_event
 events:
-  - stream:
-    type: kinesis
-    arn:
-      Fn::Join:
-        - ':'
-        - - 'arn:aws:kinesis:'
-          - Ref: AWS::AccountId
-          - 'stream/green.badeball-xyz.incoming.v1.json'
+  - stream: 'arn:aws:kinesis:#{AWS::Region}:#{AWS::AccountId}:stream/green.Badetemperatur-uj9dW.incoming.1-67BvGVw7.json'
