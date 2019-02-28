@@ -9,8 +9,8 @@ def create_table(table_name, item_list):
     client = boto3.client('dynamodb', region_name='eu-west-1')
     client.create_table(
         TableName=table_name,
-        KeySchema=[{'AttributeName': 'deviceId', 'KeyType': 'HASH'}],
-        AttributeDefinitions=[{'AttributeName': 'deviceId', 'AttributeType': 'S'}],
+        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
+        AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
@@ -44,7 +44,7 @@ class Tester(unittest.TestCase):
         table_name = 'badeball-latest'
         create_table(table_name, [test_data.item_1, test_data.item_2])
 
-        item = temperature_reader.query_for_item(test_data.item_1['deviceId'])
+        item = temperature_reader.query_for_item(test_data.item_1['id'])
         self.assertDictEqual(item, test_data.item_1)
 
     @mock_dynamodb2

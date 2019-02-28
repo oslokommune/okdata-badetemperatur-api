@@ -4,7 +4,7 @@ import boto3
 import logging
 from botocore.exceptions import ClientError
 from copy import deepcopy
-from decimal import Decimal
+from decimal import Decimal, DecimalException
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -25,6 +25,8 @@ def handle_event(event, context):
         logger.exception(f'Something went writing to dynamodb. {e}')
     except KeyError as e:
         logger.exception(f'Something went wrong when parsing event data {e}')
+    except DecimalException as e:
+        logger.exception(f'Something went wrong when converting float to Decimal. {e}')
 
 def put_item(item):
     logger.info(f'Writing new item to table/badeball-latest: {item}')

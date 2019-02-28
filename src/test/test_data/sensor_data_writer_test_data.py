@@ -3,7 +3,7 @@ import base64
 from decimal import Decimal
 
 event_data_1 = {
-    'deviceId': 'xnb003564354000000000b', 'deviceName': 'Oslo badetemp  1', 'time': '2019-02-19T12:43:09.000+0000',
+    'id': 'xnb003564354000000000b', 'name': 'Oslo badetemp  1', 'time': '2019-02-19T12:43:09.000+0000',
     'sensors': [
         {'type': 'Reference Voltage', 'value': 2.847015380859375, 'unit': 'V'},
         {'type': 'Battery Voltage', 'value': 4.1386962890625, 'unit': 'V'},
@@ -13,7 +13,7 @@ event_data_1 = {
 }
 
 event_data_2 = {
-    'deviceId': 'xnb003564354000000000c', 'deviceName': 'Oslo badetemp  2', 'time': '2019-02-19T12:43:09.000+0000',
+    'id': 'xnb003564354000000000c', 'name': 'Oslo badetemp  2', 'time': '2019-02-19T12:43:09.000+0000',
     'sensors': [
         {'type': 'Reference Voltage', 'value': 2.847015380859375, 'unit': 'V'},
         {'type': 'Battery Voltage', 'value': 4.1386962890625, 'unit': 'V'},
@@ -23,7 +23,7 @@ event_data_2 = {
 }
 
 item_1 = {
-    'deviceId': 'xnb003564354000000000b', 'deviceName': 'Oslo badetemp  1', 'time': '2019-02-19T12:43:09.000+0000',
+    'id': 'xnb003564354000000000b', 'name': 'Oslo badetemp  1', 'time': '2019-02-19T12:43:09.000+0000',
     'sensors': [
         {'type': 'Reference Voltage', 'value': Decimal('2.847015380859375'), 'unit': 'V'},
         {'type': 'Battery Voltage', 'value': Decimal('4.1386962890625'), 'unit': 'V'},
@@ -33,7 +33,7 @@ item_1 = {
 }
 
 item_2 = {
-    'deviceId': 'xnb003564354000000000c', 'deviceName': 'Oslo badetemp  2', 'time': '2019-02-19T12:43:09.000+0000',
+    'id': 'xnb003564354000000000c', 'name': 'Oslo badetemp  2', 'time': '2019-02-19T12:43:09.000+0000',
     'sensors': [
         {'type': 'Reference Voltage', 'value': Decimal('2.847015380859375'), 'unit': 'V'},
         {'type': 'Battery Voltage', 'value': Decimal('4.1386962890625'), 'unit': 'V'},

@@ -28,7 +28,7 @@ def get_temperature(event, context):
 
 def query_for_item(key):
     item = sensor_data_table.query(
-        KeyConditionExpression=Key('deviceId').eq(key)
+        KeyConditionExpression=Key('id').eq(key)
     )
     return item['Items'].pop()
 
@@ -40,8 +40,8 @@ def scan_for_items():
 
 def transform_item(item):
     return {
-        'name': item['deviceId'],
-        'location': item['deviceName'],
+        'name': item['id'],
+        'location': item['name'],
         'value': extract_temperature(item['sensors']),
         'measureTime': item['time'],
         'unit': 'C'

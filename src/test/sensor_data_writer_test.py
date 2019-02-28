@@ -9,8 +9,8 @@ def create_table(table_name):
     client = boto3.client('dynamodb', region_name='eu-west-1')
     client.create_table(
         TableName=table_name,
-        KeySchema=[{'AttributeName': 'deviceId', 'KeyType': 'HASH'}],
-        AttributeDefinitions=[{'AttributeName': 'deviceId', 'AttributeType': 'S'}],
+        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
+        AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
 

@@ -43,13 +43,15 @@ Example kinesis event input:
 `kinesis.data` needs to be a base64 encoded object with the following format:
 ```json
 {
-  "data": {
-        "deviceId": "xnb003564354000000000b", "deviceName": "Oslo badetemp  1", "sensors": [
-            {"type": "Reference Voltage", "value": 2.847015380859375, "unit": "V"},
-            {"type": "Battery Voltage", "value": 4.1386962890625, "unit": "V"},
-            {"type": "Air Temperature", "value": 22.23035400390625, "unit": "C"},
-            {"type": "Temperature", "value": 22.675046226232894, "unit": "C"}
-        ]
-    }
+    "id": "xnb003564354000000000b",
+    "name": "Oslo badetemp # 1",
+    "time": "2019-02-28T08:13:35.000+0000",
+    "sensors": [
+        {
+            "type": "Temperature",
+            "value": 3.0326954949977676,
+            "unit": "C"
+        }
+    ]
 }
 ```
