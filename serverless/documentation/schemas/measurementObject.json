@@ -2,22 +2,34 @@
   "type": "object",
   "title": "Measurement object",
   "properties": {
+    "location": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "latitude": {
+          "type": "number",
+          "format": "float"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
     "name": {
       "type": "string"
-    },
-    "location": {
-      "type": "string"
-    },
-    "value": {
-      "type": "number",
-      "format": "float"
     },
     "measureTime": {
       "type": "string",
       "format": "date-time"
     },
-    "unit": {
-      "type": "string"
+    "waterTemperature": {
+      "$ref": "{{model:Temperature}}"
+    },
+    "airTemperature": {
+      "$ref": "{{model:Temperature}}"
     }
   }
 }

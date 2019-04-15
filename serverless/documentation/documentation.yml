@@ -11,3 +11,8 @@ models:
     description: Measurements from all sensors.
     contentType: application/json
     schema: ${file(serverless/documentation/schemas/measurementObjectList.json)}
+  -
+    name: Temperature
+    description: Temperature measurement
+    contentType: application/json
+    schema: ${file(serverless/documentation/schemas/temperature.json)}
