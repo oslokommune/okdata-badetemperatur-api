@@ -1,20 +1,24 @@
 openapi: "3.0.1"
 info:
   title: "dev-badeball-api"
-  version: "2019-02-22T14:03:26Z"
+  description: "Api for extracting data from water temperature sensors in Oslo."
+  contact:
+    name: "Origo Dataplatform team"
+    email: "dataplattform@oslo.kommune.no"
+  version: "2019-04-16T10:52:43Z"
 servers:
 - url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
   variables:
     basePath:
       default: "/dev"
 paths:
-  /temperatures/{name}:
+  /temperatures/{location}:
     get:
-      description: "Returns temperature measurement objects for a single sensor."
+      description: "Returns last recorded temperature measurement for a single location."
       parameters:
-      - name: "name"
+      - name: "location"
         in: "path"
-        description: "Identifier for sensor."
+        description: "Identifier for location."
         required: true
         schema:
           type: "string"
@@ -24,52 +28,59 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MeasurementObject"
+                $ref: "#/components/schemas/Measurement"
   /temperatures:
     get:
-      description: "Returns temperature measurement objects for sensors."
+      description: "Returns last recorded temperature measurement for a all locations."
       responses:
         200:
           description: "200 response"
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/MeasurementObjectList"
+                $ref: "#/components/schemas/Measurements"
 components:
   schemas:
-    MeasurementObject:
-      title: "Measurement object"
+    Measurement:
+      type: "object"
+      properties:
+        airTemperature:
+          $ref: "#/components/schemas/Temperature"
+        name:
+          type: "string"
+        waterTemperature:
+          $ref: "#/components/schemas/Temperature"
+        location:
+          $ref: "#/components/schemas/Location"
+        measureTime:
+          type: "string"
+          format: "date-time"
+      description: "Measurement from a single location."
+    Temperature:
       type: "object"
       properties:
         unit:
           type: "string"
-        name:
-          type: "string"
-        location:
-          type: "string"
-        measureTime:
-          type: "string"
-          format: "date-time"
         value:
           type: "number"
           format: "float"
-      description: "Measurement from a single sensor."
-    MeasurementObjectList:
+      description: "Temperature measurement"
+    Measurements:
       type: "array"
-      description: "Measurements from all sensors."
+      description: "Measurements from all locations."
       items:
-        title: "Measurement object"
-        type: "object"
-        properties:
-          unit:
-            type: "string"
-          name:
-            type: "string"
-          location:
-            type: "string"
-          measureTime:
-            type: "string"
-            format: "date-time"
-          value:
-            type: "number"
-            format: "float"
+        $ref: "#/components/schemas/Measurement"
+    Location:
+      type: "object"
+      properties:
+        latitude:
+          type: "number"
+          format: "float"
+        name:
+          type: "string"
+        id:
+          type: "string"
+        longitude:
+          type: "number"
+          format: "float"
+      description: "Location"

@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "location": {
+      "$ref": "{{model:Location}}"
+    },
+    "name": {
+      "type": "string"
+    },
+    "measureTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "waterTemperature": {
+      "$ref": "{{model:Temperature}}"
+    },
+    "airTemperature": {
+      "$ref": "{{model:Temperature}}"
+    }
+  }
+}

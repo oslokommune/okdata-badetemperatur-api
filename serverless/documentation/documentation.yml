@@ -1,13 +1,28 @@
-version: 0.1.0
-description: Api for extracting data from water temperature sensors in Oslo.
+version: 0.2.5
+api:
+  info:
+    description: Api for extracting data from water temperature sensors in Oslo.
+    contact:
+      name: "Origo Dataplatform team"
+      email: "dataplattform@oslo.kommune.no"
 models:
   -
-    name: MeasurementObject
-    description: Measurement from a single sensor.
+    name: Measurement
+    description: Measurement from a single location.
     contentType: application/json
-    schema: ${file(serverless/documentation/schemas/measurementObject.json)}
+    schema: ${file(serverless/documentation/schemas/measurement.json)}
   -
-    name: MeasurementObjectList
-    description: Measurements from all sensors.
+    name: Measurements
+    description: Measurements from all locations.
     contentType: application/json
-    schema: ${file(serverless/documentation/schemas/measurementObjectList.json)}
+    schema: ${file(serverless/documentation/schemas/measurements.json)}
+  -
+    name: Temperature
+    description: Temperature measurement
+    contentType: application/json
+    schema: ${file(serverless/documentation/schemas/temperature.json)}
+  -
+    name: Location
+    description: Location
+    contentType: application/json
+    schema: ${file(serverless/documentation/schemas/location.json)}

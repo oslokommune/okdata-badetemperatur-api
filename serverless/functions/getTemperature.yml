@@ -1,9 +1,9 @@
 handler: src/main/temperature_reader.get_temperature
 events:
   - http:
-      path: temperatures/{name}
+      path: temperatures/{location}
       method: get
       parameters:
         paths:
-          name: true
+          location: true
       documentation: ${file(serverless/documentation/getTemperature.yml)}
