@@ -1,6 +1,6 @@
-description: Returns temperature measurement objects for sensors.
+description: Returns last recorded temperature measurement for a all locations.
 methodResponses:
   -
     statusCode: '200'
     responseModels:
-      "application/json": MeasurementObjectList
+      "application/json": Measurements

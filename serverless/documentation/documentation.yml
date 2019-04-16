@@ -7,15 +7,15 @@ api:
       email: "dataplattform@oslo.kommune.no"
 models:
   -
-    name: MeasurementObject
-    description: Measurement from a single sensor.
+    name: Measurement
+    description: Measurement from a single location.
     contentType: application/json
-    schema: ${file(serverless/documentation/schemas/measurementObject.json)}
+    schema: ${file(serverless/documentation/schemas/measurement.json)}
   -
-    name: MeasurementObjectList
-    description: Measurements from all sensors.
+    name: Measurements
+    description: Measurements from all locations.
     contentType: application/json
-    schema: ${file(serverless/documentation/schemas/measurementObjectList.json)}
+    schema: ${file(serverless/documentation/schemas/measurements.json)}
   -
     name: Temperature
     description: Temperature measurement
