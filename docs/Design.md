@@ -1,0 +1,3 @@
+Badetemperatur API design
+=========================
+
