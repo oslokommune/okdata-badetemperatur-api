@@ -64,6 +64,28 @@ inneholdt bl.a. sted (navn, id og koordinater), dato og vanntemperatur:
 </badetemp>
 ```
 
+## Badetemperatur Oslo - delt regnark
+
+Som erstatning for den gamle WAP-løsningen så har Webforvaltningen nå
+satt opp et delt Google-regnark hvor entreprenørene manuelt fyller ut
+badetemperaturer. Dette inneholder sted (id og navn), dato og
+vanntemperatur:
+
+```
+Artikkel-ID   Badeplass                 Temperatur   Måledato
+8268          Badedammen på Grorud    
+8269          Bekkensten                16           30.08.2018
+8270          Bestemorstranda           16           30.08.2018
+8271          Bogstadvannet   
+8265          Brekkedammen ved Frysja   15           30.08.2018
+8321          Bygdøy sjøbad   
+8374          Fiskevollbukta    
+8172          Gressholmen   
+8322          Grinidammen               15           30.08.2018
+8171          Hovedøya    
+8264          Huk                       16           30.08.2018
+```
+
 ## Badetemperatur Bergen
 
 Bergen kommune har laget et API for å hente ut badetemperaturer for AdO
