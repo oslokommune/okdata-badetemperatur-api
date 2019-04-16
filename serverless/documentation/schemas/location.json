@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number",
+      "format": "float"
+    },
+    "longitude": {
+      "type": "number",
+      "format": "float"
+    }
+  }
+}

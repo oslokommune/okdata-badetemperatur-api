@@ -16,3 +16,8 @@ models:
     description: Temperature measurement
     contentType: application/json
     schema: ${file(serverless/documentation/schemas/temperature.json)}
+  -
+    name: Location
+    description: Location
+    contentType: application/json
+    schema: ${file(serverless/documentation/schemas/location.json)}

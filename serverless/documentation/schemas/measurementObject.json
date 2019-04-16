@@ -1,22 +1,8 @@
 {
   "type": "object",
-  "title": "Measurement object",
   "properties": {
     "location": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "latitude": {
-          "type": "number",
-          "format": "float"
-        },
-        "longitude": {
-          "type": "number",
-          "format": "float"
-        }
-      }
+      "$ref": "{{model:Location}}"
     },
     "name": {
       "type": "string"
