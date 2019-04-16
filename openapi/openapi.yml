@@ -1,7 +1,11 @@
 openapi: "3.0.1"
 info:
   title: "dev-badeball-api"
-  version: "2019-02-22T14:03:26Z"
+  description: "Api for extracting data from water temperature sensors in Oslo."
+  contact:
+    name: "Origo Dataplatform team"
+    email: "dataplattform@oslo.kommune.no"
+  version: "2019-04-16T08:53:28Z"
 servers:
 - url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
   variables:
@@ -37,39 +41,46 @@ paths:
                 $ref: "#/components/schemas/MeasurementObjectList"
 components:
   schemas:
-    MeasurementObject:
-      title: "Measurement object"
+    Temperature:
       type: "object"
       properties:
         unit:
           type: "string"
-        name:
-          type: "string"
-        location:
-          type: "string"
-        measureTime:
-          type: "string"
-          format: "date-time"
         value:
           type: "number"
           format: "float"
+      description: "Temperature measurement"
+    MeasurementObject:
+      type: "object"
+      properties:
+        airTemperature:
+          $ref: "#/components/schemas/Temperature"
+        name:
+          type: "string"
+        waterTemperature:
+          $ref: "#/components/schemas/Temperature"
+        location:
+          $ref: "#/components/schemas/Location"
+        measureTime:
+          type: "string"
+          format: "date-time"
       description: "Measurement from a single sensor."
+    Location:
+      type: "object"
+      properties:
+        latitude:
+          type: "number"
+          format: "float"
+        name:
+          type: "string"
+        id:
+          type: "string"
+        longitude:
+          type: "number"
+          format: "float"
+      description: "Location"
     MeasurementObjectList:
       type: "array"
       description: "Measurements from all sensors."
       items:
-        title: "Measurement object"
-        type: "object"
-        properties:
-          unit:
-            type: "string"
-          name:
-            type: "string"
-          location:
-            type: "string"
-          measureTime:
-            type: "string"
-            format: "date-time"
-          value:
-            type: "number"
-            format: "float"
+        $ref: "#/components/schemas/MeasurementObject"
