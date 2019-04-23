@@ -89,15 +89,11 @@ Forslag til nytt format på badetemperatur-dataene:
         "longitude": 10.726743
       },
       "name": "Hovedøya brygge",
-      "measureTime": "2019-03-25T02:33:42+0200",
-      "waterTemperature": {
+      "temperature": {
         "value": 4.3,
         "unit": "C"
       },
-      "airTemperature": {
-        "value": -1.2,
-        "unit": "C"
-      }
+      "measureTime": "2019-03-25T02:33:42+0200"
     }
   ]
 }

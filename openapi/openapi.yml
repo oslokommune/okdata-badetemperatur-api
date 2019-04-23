@@ -5,7 +5,7 @@ info:
   contact:
     name: "Origo Dataplatform team"
     email: "dataplattform@oslo.kommune.no"
-  version: "2019-04-16T10:52:43Z"
+  version: "2019-04-23T12:20:15Z"
 servers:
 - url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
   variables:
@@ -44,11 +44,9 @@ components:
     Measurement:
       type: "object"
       properties:
-        airTemperature:
-          $ref: "#/components/schemas/Temperature"
         name:
           type: "string"
-        waterTemperature:
+        temperature:
           $ref: "#/components/schemas/Temperature"
         location:
           $ref: "#/components/schemas/Location"

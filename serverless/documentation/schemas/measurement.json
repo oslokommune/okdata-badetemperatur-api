@@ -7,15 +7,12 @@
     "name": {
       "type": "string"
     },
+    "temperature": {
+      "$ref": "{{model:Temperature}}"
+    },
     "measureTime": {
       "type": "string",
       "format": "date-time"
-    },
-    "waterTemperature": {
-      "$ref": "{{model:Temperature}}"
-    },
-    "airTemperature": {
-      "$ref": "{{model:Temperature}}"
     }
   }
 }
