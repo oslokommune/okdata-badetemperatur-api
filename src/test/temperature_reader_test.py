@@ -9,13 +9,12 @@ def create_table(table_name, item_list):
     client = boto3.client('dynamodb', region_name='eu-west-1')
     client.create_table(
         TableName=table_name,
-        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
+        KeySchema=[{'AttributeName': 'locationId', 'KeyType': 'HASH'}],
         AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     sensor_data_table = dynamodb.Table(table_name)
-
     for item in item_list:
         sensor_data_table.put_item(Item=item)
 
@@ -44,7 +43,7 @@ class Tester(unittest.TestCase):
         table_name = 'badeball-latest'
         create_table(table_name, [test_data.item_1, test_data.item_2])
 
-        item = temperature_reader.query_for_item(test_data.item_1['id'])
+        item = temperature_reader.query_for_item(test_data.item_1['locationId'])
         self.assertDictEqual(item, test_data.item_1)
 
     @mock_dynamodb2
@@ -56,13 +55,10 @@ class Tester(unittest.TestCase):
         self.assertListEqual(items_in_table, [test_data.item_1, test_data.item_2])
 
 
-    def test_transform_item(self):
-        transformed_item = temperature_reader.transform_item(test_data.item_1)
+    def test_decimal_to_float(self):
+        transformed_item = temperature_reader.from_dynamodb_format(test_data.item_1)
         self.assertDictEqual(transformed_item, test_data.item_1_transformed)
 
-    def test_extract_temperature(self):
-        temperature = temperature_reader.extract_temperature(test_data.item_1['sensors'])
-        self.assertEqual(temperature, 22.675046226232894)
 
 if __name__ == '__main__':
     unittest.main()

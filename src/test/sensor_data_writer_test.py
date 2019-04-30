@@ -9,7 +9,7 @@ def create_table(table_name):
     client = boto3.client('dynamodb', region_name='eu-west-1')
     client.create_table(
         TableName=table_name,
-        KeySchema=[{'AttributeName': 'id', 'KeyType': 'HASH'}],
+        KeySchema=[{'AttributeName': 'locationId', 'KeyType': 'HASH'}],
         AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
@@ -43,14 +43,25 @@ class Tester(unittest.TestCase):
 
         assert test_data.item_1 in sensor_data_table.scan()['Items']
 
-    def test_float_to_decimal(self):
-        item = test_data.event_data_1
-        new_item = sensor_data_writer.float_to_decimal(item)
-        for i in range(0, len(item['sensors'])):
-            self.assertEqual(
-                float(new_item['sensors'][i]['value']),
-                item['sensors'][i]['value']
-            )
+    def test_to_dynamo_db_format(self):
+        new_item = sensor_data_writer.to_dynamodb_format(test_data.event_data_1)
+        self.assertEqual(
+            new_item['locationId'],
+            test_data.event_data_1['location']['id']
+        )
+        self.assertEqual(
+            float(new_item['temperature']['value']),
+            test_data.event_data_1['temperature']['value']
+        )
+        self.assertEqual(
+            float(new_item['location']['longitude']),
+            test_data.event_data_1['location']['longitude']
+        )
+        self.assertEqual(
+            float(new_item['location']['latitude']),
+            test_data.event_data_1['location']['latitude']
+        )
+
 
     def test_b64_to_obj(self):
         self.assertDictEqual(

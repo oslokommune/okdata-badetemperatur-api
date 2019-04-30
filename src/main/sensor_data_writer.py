@@ -16,7 +16,7 @@ sensor_data_table = dynamodb.Table('badeball-latest')
 def handle_event(event, context):
     try:
         list(map(lambda item: put_item(item),
-                 map(lambda record_data: float_to_decimal(record_data),
+                 map(lambda record_data: to_dynamodb_format(record_data),
                      map(lambda record: b64_to_obj(record['kinesis']['data']), event['Records'])
                      )
                  )
@@ -36,11 +36,12 @@ def put_item(item):
     return response
 
 
-def float_to_decimal(item):
+def to_dynamodb_format(item):
     new_item = deepcopy(item)
-    for sensor_data in new_item['sensors']:
-        sensor_data['value'] = Decimal(str(sensor_data['value']))
-
+    new_item['locationId'] = new_item['location']['id']
+    new_item['temperature']['value'] = Decimal(str(new_item['temperature']['value']))
+    new_item['location']['latitude'] = Decimal(str(new_item['location']['latitude']))
+    new_item['location']['longitude'] = Decimal(str(new_item['location']['longitude']))
     return new_item
 
 

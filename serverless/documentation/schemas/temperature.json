@@ -8,5 +8,7 @@
     "unit": {
       "type": "string"
     }
-  }
+  },
+  "required": ["value", "unit"],
+  "additionalProperties": false
 }

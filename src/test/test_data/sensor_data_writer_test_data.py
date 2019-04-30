@@ -3,43 +3,65 @@ import base64
 from decimal import Decimal
 
 event_data_1 = {
-    'id': 'xnb003564354000000000b', 'name': 'Oslo badetemp  1', 'time': '2019-02-19T12:43:09.000+0000',
-    'sensors': [
-        {'type': 'Reference Voltage', 'value': 2.847015380859375, 'unit': 'V'},
-        {'type': 'Battery Voltage', 'value': 4.1386962890625, 'unit': 'V'},
-        {'type': 'Air Temperature', 'value': 22.23035400390625, 'unit': 'C'},
-        {'type': 'Temperature', 'value': 22.675046226232894, 'unit': 'C'}
-    ]
+    "location": {
+        "id": "8171",
+        "name": "Hovedøya",
+        "latitude": 59.893905,
+        "longitude": 10.726743
+    },
+    "name": "Hovedøya brygge",
+    "temperature": {
+        "value": 4.3,
+        "unit": "C"
+    },
+    "measureTime": "2019-02-19T12:43:09.000+0000"
 }
 
 event_data_2 = {
-    'id': 'xnb003564354000000000c', 'name': 'Oslo badetemp  2', 'time': '2019-02-19T12:43:09.000+0000',
-    'sensors': [
-        {'type': 'Reference Voltage', 'value': 2.847015380859375, 'unit': 'V'},
-        {'type': 'Battery Voltage', 'value': 4.1386962890625, 'unit': 'V'},
-        {'type': 'Air Temperature', 'value': 22.23035400390625, 'unit': 'C'},
-        {'type': 'Temperature', 'value': 22.675046226232894, 'unit': 'C'}
-    ]
+    "location": {
+        "id": "8172",
+        "name": "Frysja",
+        "latitude": 59.893905,
+        "longitude": 10.726743
+    },
+    "name": "Hovedøya brygge",
+    "temperature": {
+        "value": 4.4,
+        "unit": "C"
+    },
+    "measureTime": "2019-02-19T12:43:09.000+0000"
 }
 
 item_1 = {
-    'id': 'xnb003564354000000000b', 'name': 'Oslo badetemp  1', 'time': '2019-02-19T12:43:09.000+0000',
-    'sensors': [
-        {'type': 'Reference Voltage', 'value': Decimal('2.847015380859375'), 'unit': 'V'},
-        {'type': 'Battery Voltage', 'value': Decimal('4.1386962890625'), 'unit': 'V'},
-        {'type': 'Air Temperature', 'value': Decimal('22.23035400390625'), 'unit': 'C'},
-        {'type': 'Temperature', 'value': Decimal('22.675046226232894'), 'unit': 'C'}
-    ]
+    "locationId": "8171",
+    "location": {
+        "id": "8171",
+        "name": "Hovedøya",
+        "latitude": Decimal('59.893905'),
+        "longitude": Decimal('10.726743')
+    },
+    "name": "Hovedøya brygge",
+    "temperature": {
+        "value": Decimal('4.3'),
+        "unit": "C"
+    },
+    "measureTime": "2019-02-19T12:43:09.000+0000"
 }
 
 item_2 = {
-    'id': 'xnb003564354000000000c', 'name': 'Oslo badetemp  2', 'time': '2019-02-19T12:43:09.000+0000',
-    'sensors': [
-        {'type': 'Reference Voltage', 'value': Decimal('2.847015380859375'), 'unit': 'V'},
-        {'type': 'Battery Voltage', 'value': Decimal('4.1386962890625'), 'unit': 'V'},
-        {'type': 'Air Temperature', 'value': Decimal('22.23035400390625'), 'unit': 'C'},
-        {'type': 'Temperature', 'value': Decimal('22.675046226232894'), 'unit': 'C'}
-    ]
+    "locationId": "8172",
+    "location": {
+        "id": "8172",
+        "name": "Frysja",
+        "latitude": Decimal('59.893905'),
+        "longitude": Decimal('10.726743')
+    },
+    "name": "Hovedøya brygge",
+    "temperature": {
+        "value": Decimal('4.4'),
+        "unit": "C"
+    },
+    "measureTime": "2019-02-19T12:43:09.000+0000"
 }
 
 kinesis_event = {

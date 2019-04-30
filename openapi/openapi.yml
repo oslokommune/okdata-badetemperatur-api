@@ -5,7 +5,7 @@ info:
   contact:
     name: "Origo Dataplatform team"
     email: "dataplattform@oslo.kommune.no"
-  version: "2019-04-23T12:20:15Z"
+  version: "2019-04-30T10:54:44Z"
 servers:
 - url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
   variables:
@@ -42,6 +42,10 @@ paths:
 components:
   schemas:
     Measurement:
+      required:
+      - "location"
+      - "measureTime"
+      - "temperature"
       type: "object"
       properties:
         name:
@@ -53,8 +57,14 @@ components:
         measureTime:
           type: "string"
           format: "date-time"
+        sensorId:
+          type: "string"
+      additionalProperties: false
       description: "Measurement from a single location."
     Temperature:
+      required:
+      - "unit"
+      - "value"
       type: "object"
       properties:
         unit:
@@ -62,6 +72,7 @@ components:
         value:
           type: "number"
           format: "float"
+      additionalProperties: false
       description: "Temperature measurement"
     Measurements:
       type: "array"
@@ -69,6 +80,8 @@ components:
       items:
         $ref: "#/components/schemas/Measurement"
     Location:
+      required:
+      - "id"
       type: "object"
       properties:
         latitude:
@@ -81,4 +94,5 @@ components:
         longitude:
           type: "number"
           format: "float"
+      additionalProperties: false
       description: "Location"

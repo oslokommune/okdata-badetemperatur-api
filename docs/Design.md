@@ -89,6 +89,7 @@ Forslag til nytt format på badetemperatur-dataene:
         "longitude": 10.726743
       },
       "name": "Hovedøya brygge",
+      "sensorId": "<sensor id>",
       "temperature": {
         "value": 4.3,
         "unit": "C"

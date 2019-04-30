@@ -4,6 +4,9 @@
     "location": {
       "$ref": "{{model:Location}}"
     },
+    "sensorId": {
+      "type": "string"
+    },
     "name": {
       "type": "string"
     },
@@ -14,5 +17,7 @@
       "type": "string",
       "format": "date-time"
     }
-  }
+  },
+  "required": ["location", "temperature", "measureTime"],
+  "additionalProperties": false
 }
