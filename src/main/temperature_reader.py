@@ -5,7 +5,7 @@ from boto3.dynamodb.conditions import Key
 from copy import deepcopy
 
 dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
-sensor_data_table = dynamodb.Table('badeball-latest')
+sensor_data_table = dynamodb.Table('badetemperatur-latest')
 
 
 def get_all_temperatures(event, context):

@@ -1,5 +1,5 @@
 
-service: badeball-api
+service: badetemperatur-api
 
 provider:
   name: aws
@@ -11,7 +11,7 @@ provider:
     serverSideEncryption: AES256
   deploymentPrefix: deploy
   iamManagedPolicies:
-    - { 'Fn::Join': [':', ['arn:aws:iam:', { Ref: 'AWS::AccountId' }, 'policy/badeball-api-policy']] }
+    - arn:aws:iam::#{AWS::AccountId}:policy/badeball-api-policy
 
 functions:
   getAllTemperatures: ${file(serverless/functions/getTemperatures.yml)}

@@ -23,7 +23,7 @@ class Tester(unittest.TestCase):
 
     @mock_dynamodb2
     def test_handle_event(self):
-        table_name = 'badeball-latest'
+        table_name = 'badetemperatur-latest'
         create_table(table_name)
         sensor_data_table = dynamodb_table(table_name)
 
@@ -35,7 +35,7 @@ class Tester(unittest.TestCase):
 
     @mock_dynamodb2
     def test_put_item(self):
-        table_name = 'badeball-latest'
+        table_name = 'badetemperatur-latest'
         create_table(table_name)
         sensor_data_table = dynamodb_table(table_name)
 

@@ -10,7 +10,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
-sensor_data_table = dynamodb.Table('badeball-latest')
+sensor_data_table = dynamodb.Table('badetemperatur-latest')
 
 
 def handle_event(event, context):
