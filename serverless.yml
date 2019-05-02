@@ -11,7 +11,7 @@ provider:
     serverSideEncryption: AES256
   deploymentPrefix: deploy
   iamManagedPolicies:
-    - arn:aws:iam::#{AWS::AccountId}:policy/badeball-api-policy
+    - arn:aws:iam::#{AWS::AccountId}:policy/badetemperatur-api-policy
 
 functions:
   getAllTemperatures: ${file(serverless/functions/getTemperatures.yml)}
