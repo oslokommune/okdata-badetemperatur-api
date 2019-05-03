@@ -19,7 +19,7 @@ def get_all_temperatures(event, context):
 
 
 def get_temperature(event, context):
-    key = event['pathParameters']['name']
+    key = event['pathParameters']['location']
     temperature_item = query_for_item(key)
 
     response_body = from_dynamodb_format(temperature_item)
@@ -29,7 +29,7 @@ def get_temperature(event, context):
 
 def query_for_item(key):
     item = sensor_data_table.query(
-        KeyConditionExpression=Key('lovationId').eq(key)
+        KeyConditionExpression=Key('locationId').eq(key)
     )
     return item['Items'].pop()
 

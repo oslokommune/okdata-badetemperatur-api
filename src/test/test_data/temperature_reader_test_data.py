@@ -88,7 +88,7 @@ http_event_with_path_params = {
     'headers': {},
     'queryStringParameters': None,
     'pathParameters': {
-        'name': item_1['locationId']
+        'location': item_1['locationId']
     },
     'stageVariables': None,
     'requestContext': {},
