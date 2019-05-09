@@ -11,7 +11,7 @@ def create_table(table_name):
     client.create_table(
         TableName=table_name,
         KeySchema=[{'AttributeName': 'locationId', 'KeyType': 'HASH'}],
-        AttributeDefinitions=[{'AttributeName': 'id', 'AttributeType': 'S'}],
+        AttributeDefinitions=[{'AttributeName': 'locationId', 'AttributeType': 'S'}],
         ProvisionedThroughput={'ReadCapacityUnits': 5, 'WriteCapacityUnits': 5}
     )
 
@@ -46,22 +46,7 @@ class Tester(unittest.TestCase):
 
     def test_to_dynamo_db_format(self):
         new_item = sensor_data_writer.to_dynamodb_format(test_data.event_data_1)
-        self.assertEqual(
-            new_item['locationId'],
-            test_data.item_1['locationId']
-        )
-        self.assertEqual(
-            new_item['temperature']['value'],
-            test_data.item_1['temperature']['value']
-        )
-        self.assertEqual(
-            new_item['location']['longitude'],
-            test_data.item_1['location']['longitude']
-        )
-        self.assertEqual(
-            new_item['location']['latitude'],
-            test_data.item_1['location']['latitude']
-        )
+        self.assertDictEqual(new_item, test_data.item_1)
 
 
     def test_b64_to_obj(self):
