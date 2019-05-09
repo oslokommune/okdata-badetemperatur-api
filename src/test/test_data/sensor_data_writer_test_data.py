@@ -11,7 +11,7 @@ event_data_1 = {
     },
     "name": "Hovedøya brygge",
     "temperature": {
-        "value": 4.3,
+        "value": 4.335,
         "unit": "C"
     },
     "measureTime": "2019-02-19T12:43:09.000+0000"
@@ -37,12 +37,12 @@ item_1 = {
     "location": {
         "id": "8171",
         "name": "Hovedøya",
-        "latitude": Decimal('59.893905'),
-        "longitude": Decimal('10.726743')
+        "latitude": Decimal('59.89390'),
+        "longitude": Decimal('10.72674')
     },
     "name": "Hovedøya brygge",
     "temperature": {
-        "value": Decimal('4.3'),
+        "value": Decimal('4.34'),
         "unit": "C"
     },
     "measureTime": "2019-02-19T12:43:09.000+0000"
@@ -53,12 +53,12 @@ item_2 = {
     "location": {
         "id": "8172",
         "name": "Frysja",
-        "latitude": Decimal('59.893905'),
-        "longitude": Decimal('10.726743')
+        "latitude": Decimal('59.89390'),
+        "longitude": Decimal('10.72674')
     },
     "name": "Hovedøya brygge",
     "temperature": {
-        "value": Decimal('4.4'),
+        "value": Decimal('4.40'),
         "unit": "C"
     },
     "measureTime": "2019-02-19T12:43:09.000+0000"

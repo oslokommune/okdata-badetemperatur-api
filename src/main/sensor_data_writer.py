@@ -39,11 +39,17 @@ def put_item(item):
 def to_dynamodb_format(item):
     new_item = deepcopy(item)
     new_item['locationId'] = new_item['location']['id']
-    new_item['temperature']['value'] = Decimal(str(new_item['temperature']['value']))
-    new_item['location']['latitude'] = Decimal(str(new_item['location']['latitude']))
-    new_item['location']['longitude'] = Decimal(str(new_item['location']['longitude']))
+    new_item['temperature']['value'] = float_to_decimal(new_item['temperature']['value'], num_decimals=2)
+    new_item['location']['latitude'] = float_to_decimal(new_item['location']['latitude'], num_decimals=5)
+    new_item['location']['longitude'] = float_to_decimal(new_item['location']['longitude'], num_decimals=5)
     return new_item
 
+def float_to_decimal(f, num_decimals=None):
+    d = Decimal(str(f))
+    if num_decimals:
+        return round(d, num_decimals)
+    else:
+        return d
 
 def b64_to_obj(b64):
     s = base64.b64decode(b64)

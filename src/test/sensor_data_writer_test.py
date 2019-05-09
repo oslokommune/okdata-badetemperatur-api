@@ -3,6 +3,7 @@ import boto3
 import src.main.sensor_data_writer as sensor_data_writer
 import src.test.test_data.sensor_data_writer_test_data as test_data
 
+from decimal import Decimal
 from moto import mock_dynamodb2
 
 def create_table(table_name):
@@ -47,19 +48,19 @@ class Tester(unittest.TestCase):
         new_item = sensor_data_writer.to_dynamodb_format(test_data.event_data_1)
         self.assertEqual(
             new_item['locationId'],
-            test_data.event_data_1['location']['id']
+            test_data.item_1['locationId']
         )
         self.assertEqual(
-            float(new_item['temperature']['value']),
-            test_data.event_data_1['temperature']['value']
+            new_item['temperature']['value'],
+            test_data.item_1['temperature']['value']
         )
         self.assertEqual(
-            float(new_item['location']['longitude']),
-            test_data.event_data_1['location']['longitude']
+            new_item['location']['longitude'],
+            test_data.item_1['location']['longitude']
         )
         self.assertEqual(
-            float(new_item['location']['latitude']),
-            test_data.event_data_1['location']['latitude']
+            new_item['location']['latitude'],
+            test_data.item_1['location']['latitude']
         )
 
 
@@ -68,6 +69,17 @@ class Tester(unittest.TestCase):
             sensor_data_writer.b64_to_obj(test_data.b64_encoded_obj),
             test_data.obj_decoded
         )
+
+    def test_float_to_decimal(self):
+        f1 = 4.9E-324
+        f2 = 4.24597
+        f3 = 4.24497
+        self.assertEqual(sensor_data_writer.float_to_decimal(f1, num_decimals=2), Decimal('0.00'))
+        self.assertEqual(sensor_data_writer.float_to_decimal(f2, num_decimals=2), Decimal('4.25'))
+        self.assertEqual(sensor_data_writer.float_to_decimal(f3, num_decimals=2), Decimal('4.24'))
+        self.assertEqual(sensor_data_writer.float_to_decimal(f3), Decimal('4.24497'))
+
+
 
 if __name__ == '__main__':
     unittest.main()
