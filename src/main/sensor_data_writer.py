@@ -17,7 +17,8 @@ def handle_event(event, context):
     try:
         list(map(lambda item: put_item(item),
                  map(lambda record_data: to_dynamodb_format(record_data),
-                     map(lambda record: b64_to_obj(record['kinesis']['data']), event['Records'])
+                     filter(lambda record_data: bool(record_data['temperature']),
+                            map(lambda record: b64_to_obj(record['kinesis']['data']), event['Records']))
                      )
                  )
              )

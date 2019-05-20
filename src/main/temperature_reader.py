@@ -20,9 +20,11 @@ def get_all_temperatures(event, context):
 
 def get_temperature(event, context):
     key = event['pathParameters']['location']
-    temperature_item = query_for_item(key)
+    temperature_item_list = query_for_item(key)
 
-    response_body = from_dynamodb_format(temperature_item)
+    response_body = list(
+        map(lambda item: from_dynamodb_format(item), temperature_item_list)
+    )
 
     return lambda_proxy_response(200, response_body)
 
@@ -31,7 +33,7 @@ def query_for_item(key):
     item = sensor_data_table.query(
         KeyConditionExpression=Key('locationId').eq(key)
     )
-    return item['Items'].pop()
+    return item['Items']
 
 
 def scan_for_items():
@@ -46,13 +48,6 @@ def from_dynamodb_format(item):
     new_item['location']['longitude'] = float(new_item['location']['longitude'])
     new_item.pop('locationId')
     return new_item
-
-
-def extract_temperature(sensor_value_list):
-    temperature = list(
-        filter(lambda sensor_value: sensor_value['type'].lower() == 'temperature', sensor_value_list))
-
-    return float(temperature.pop()['value'])
 
 
 def lambda_proxy_response(status_code, response_body):

@@ -8,4 +8,4 @@ methodResponses:
   -
     statusCode: '200'
     responseModels:
-      "application/json": Measurement
+      "application/json": Measurements

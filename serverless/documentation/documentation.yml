@@ -1,4 +1,4 @@
-version: 0.2.9
+version: 0.2.10
 api:
   info:
     description: Api for extracting data from water temperature sensors in Oslo.

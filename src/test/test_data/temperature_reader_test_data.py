@@ -1,67 +1,19 @@
-import json
-from decimal import Decimal
+from src.test.test_data.test_data_utils import dynamodb_item_data, temperature_data
 
-item_1 = {
-    "locationId": "8171",
-    "location": {
-        "id": "8171",
-        "name": "Hovedøya",
-        "latitude": Decimal('59.893905'),
-        "longitude": Decimal('10.726743')
-    },
-    "name": "Hovedøya brygge",
-    "temperature": {
-        "value": Decimal('4.3'),
-        "unit": "C"
-    },
-    "measureTime": "2019-02-19T12:43:09.000+0000"
-}
+location_id_1, location_id_2 = '8171', '8172'
 
-item_2 = {
-    "locationId": "8172",
-    "location": {
-        "id": "8172",
-        "name": "Hovedøya",
-        "latitude": Decimal('59.893905'),
-        "longitude": Decimal('10.726743')
-    },
-    "name": "Hovedøya brygge",
-    "temperature": {
-        "value": Decimal('4.4'),
-        "unit": "C"
-    },
-    "measureTime": "2019-02-19T12:43:09.000+0000"
-}
+item_1_sensor = dynamodb_item_data(location_id_1, 'sensor')
+item_1_sensor_transformed = temperature_data(location_id_1, 'sensor')
 
-item_1_transformed = {
-    "location": {
-        "id": "8171",
-        "name": "Hovedøya",
-        "latitude": 59.893905,
-        "longitude": 10.726743
-    },
-    "name": "Hovedøya brygge",
-    "temperature": {
-        "value": 4.3,
-        "unit": "C"
-    },
-    "measureTime": "2019-02-19T12:43:09.000+0000"
-}
+item_1_manual = dynamodb_item_data(location_id_1, 'manual')
+item_1_manual_transformed = temperature_data(location_id_1, 'manual')
 
-item_2_transformed = {
-    "location": {
-        "id": "8172",
-        "name": "Hovedøya",
-        "latitude": 59.893905,
-        "longitude": 10.726743
-    },
-    "name": "Hovedøya brygge",
-    "temperature": {
-        "value": 4.4,
-        "unit": "C"
-    },
-    "measureTime": "2019-02-19T12:43:09.000+0000"
-}
+item_2_sensor = dynamodb_item_data(location_id_2, 'sensor')
+item_2_sensor_transformed = temperature_data(location_id_2, 'sensor')
+
+item_2_manual = dynamodb_item_data(location_id_2, 'manual')
+item_2_manual_transformed = temperature_data(location_id_2, 'manual')
+
 
 http_event_no_path_params = {
     'resource': '/',
@@ -76,10 +28,12 @@ http_event_no_path_params = {
     'isBase64Encoded': False
 }
 
-get_all_temperatures_ok_response = {
-    'statusCode': 200,
-    'body': json.dumps([item_1_transformed, item_2_transformed])
-}
+get_all_temperatures_response_body = [
+    item_1_sensor_transformed,
+    item_1_manual_transformed,
+    item_2_sensor_transformed,
+    item_2_manual_transformed
+]
 
 http_event_with_path_params = {
     'resource': '/',
@@ -88,7 +42,7 @@ http_event_with_path_params = {
     'headers': {},
     'queryStringParameters': None,
     'pathParameters': {
-        'location': item_1['locationId']
+        'location': location_id_1
     },
     'stageVariables': None,
     'requestContext': {},
@@ -96,7 +50,7 @@ http_event_with_path_params = {
     'isBase64Encoded': False
 }
 
-get_temperature_ok_response = {
-    'statusCode': 200,
-    'body': json.dumps(item_1_transformed)
-}
+get_temperature_response_body = [
+    item_1_manual_transformed,
+    item_1_sensor_transformed
+]

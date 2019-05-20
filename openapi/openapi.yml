@@ -1,11 +1,11 @@
 openapi: "3.0.1"
 info:
-  title: "dev-badeball-api"
+  title: "dev-badetemperatur-api"
   description: "Api for extracting data from water temperature sensors in Oslo."
   contact:
     name: "Origo Dataplatform team"
     email: "dataplattform@oslo.kommune.no"
-  version: "2019-04-30T10:54:44Z"
+  version: "2019-05-20T13:39:46Z"
 servers:
 - url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
   variables:
@@ -28,7 +28,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Measurement"
+                $ref: "#/components/schemas/Measurements"
   /temperatures:
     get:
       description: "Returns last recorded temperature measurement for a all locations."
