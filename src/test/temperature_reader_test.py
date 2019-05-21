@@ -18,7 +18,7 @@ class Tester(unittest.TestCase):
             test_data.item_2_manual
         ])
 
-        response = temperature_reader.get_all_temperatures(test_data.http_event_no_path_params, None)
+        response = temperature_reader.get_all_temperatures(test_data.http_event_no_query_params, None)
         response_body = json.loads(response['body'])
         self.assertCountEqual(response_body, test_data.get_all_temperatures_response_body)
     @mock_dynamodb2
@@ -31,7 +31,7 @@ class Tester(unittest.TestCase):
             test_data.item_2_manual
         ])
 
-        response = temperature_reader.get_temperature(test_data.http_event_with_path_params, None)
+        response = temperature_reader.get_all_temperatures(test_data.http_event_with_query_params, None)
         response_body = json.loads(response['body'])
         self.assertCountEqual(response_body, test_data.get_temperature_response_body)
 

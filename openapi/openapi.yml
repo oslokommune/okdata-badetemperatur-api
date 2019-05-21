@@ -5,33 +5,22 @@ info:
   contact:
     name: "Origo Dataplatform team"
     email: "dataplattform@oslo.kommune.no"
-  version: "2019-05-20T13:39:46Z"
+  version: "2019-05-20T15:06:25Z"
 servers:
 - url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
   variables:
     basePath:
       default: "/dev"
 paths:
-  /temperatures/{location}:
-    get:
-      description: "Returns last recorded temperature measurement for a single location."
-      parameters:
-      - name: "location"
-        in: "path"
-        description: "Identifier for location."
-        required: true
-        schema:
-          type: "string"
-      responses:
-        200:
-          description: "200 response"
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Measurements"
   /temperatures:
     get:
-      description: "Returns last recorded temperature measurement for a all locations."
+      description: "Returns last recorded temperature measurement for all locations. Offers query parameter for filtering locations."
+      parameters:
+      - name: "location"
+        in: "query"
+        description: "Identifier for location"
+        schema:
+          type: "string"
       responses:
         200:
           description: "200 response"

@@ -15,7 +15,6 @@ provider:
 
 functions:
   getAllTemperatures: ${file(serverless/functions/getTemperatures.yml)}
-  getTemperature: ${file(serverless/functions/getTemperature.yml)}
   writeSensordata: ${file(serverless/functions/writeSensordata.yml)}
 
 package:

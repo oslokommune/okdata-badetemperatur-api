@@ -1,4 +1,8 @@
-description: Returns last recorded temperature measurement for a all locations.
+description: Returns last recorded temperature measurement for all locations. Offers query parameter for filtering locations.
+queryParams:
+  -
+    name: location
+    description: Identifier for location
 methodResponses:
   -
     statusCode: '200'

@@ -9,18 +9,11 @@ sensor_data_table = dynamodb.Table('badetemperatur-latest')
 
 
 def get_all_temperatures(event, context):
-
-    temperature_item_list = scan_for_items()
-    response_body = list(
-        map(lambda item: from_dynamodb_format(item), temperature_item_list)
-    )
-
-    return lambda_proxy_response(200, response_body)
-
-
-def get_temperature(event, context):
-    key = event['pathParameters']['location']
-    temperature_item_list = query_for_item(key)
+    if event['queryStringParameters']:
+        key = event['queryStringParameters']['location']
+        temperature_item_list = query_for_item(key)
+    else:
+        temperature_item_list = scan_for_items()
 
     response_body = list(
         map(lambda item: from_dynamodb_format(item), temperature_item_list)

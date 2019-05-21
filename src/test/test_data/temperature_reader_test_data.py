@@ -15,7 +15,7 @@ item_2_manual = dynamodb_item_data(location_id_2, 'manual')
 item_2_manual_transformed = temperature_data(location_id_2, 'manual')
 
 
-http_event_no_path_params = {
+http_event_no_query_params = {
     'resource': '/',
     'path': '/',
     'httpMethod': 'GET',
@@ -35,15 +35,15 @@ get_all_temperatures_response_body = [
     item_2_manual_transformed
 ]
 
-http_event_with_path_params = {
+http_event_with_query_params = {
     'resource': '/',
     'path': '/',
     'httpMethod': 'GET',
     'headers': {},
-    'queryStringParameters': None,
-    'pathParameters': {
+    'queryStringParameters': {
         'location': location_id_1
     },
+    'pathParameters': None,
     'stageVariables': None,
     'requestContext': {},
     'body': None,
