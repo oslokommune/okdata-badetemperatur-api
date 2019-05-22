@@ -1,20 +1,18 @@
 openapi: "3.0.1"
 info:
-  title: "dev-badetemperatur-api"
-  description: "Api for extracting data from water temperature sensors in Oslo."
+  title: "badetemperatur-api"
+  description: "Api for extracting most recently measured water temperatures in Oslo."
   contact:
     name: "Origo Dataplatform team"
     email: "dataplattform@oslo.kommune.no"
-  version: "2019-05-20T15:06:25Z"
+  version: "2019-05-22T08:30:22Z"
 servers:
-- url: "https://***REMOVED***.execute-api.eu-west-1.amazonaws.com/{basePath}"
-  variables:
-    basePath:
-      default: "/dev"
+- url: "https://badetemperatur.api.oslo.kommune.no"
 paths:
   /temperatures:
     get:
-      description: "Returns last recorded temperature measurement for all locations. Offers query parameter for filtering locations."
+      description: "Returns last recorded temperature measurement for all locations.\
+        \ Offers query parameter for filtering locations."
       parameters:
       - name: "location"
         in: "query"
@@ -46,8 +44,6 @@ components:
         measureTime:
           type: "string"
           format: "date-time"
-        sensorId:
-          type: "string"
       additionalProperties: false
       description: "Measurement from a single location."
     Temperature:

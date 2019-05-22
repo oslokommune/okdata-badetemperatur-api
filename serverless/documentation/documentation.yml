@@ -1,7 +1,7 @@
-version: 0.2.13
+version: 0.2.15
 api:
   info:
-    description: Api for extracting data from water temperature sensors in Oslo.
+    description: Api for extracting most recently measured water temperatures in Oslo.
     contact:
       name: "Origo Dataplatform team"
       email: "dataplattform@oslo.kommune.no"

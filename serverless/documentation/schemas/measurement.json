@@ -4,9 +4,6 @@
     "location": {
       "$ref": "{{model:Location}}"
     },
-    "sensorId": {
-      "type": "string"
-    },
     "name": {
       "type": "string"
     },
