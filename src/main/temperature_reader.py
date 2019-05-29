@@ -46,5 +46,8 @@ def from_dynamodb_format(item):
 def lambda_proxy_response(status_code, response_body):
     return {
         'statusCode': status_code,
-        'body': json.dumps(response_body)
+        'body': json.dumps(response_body),
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+        }
     }

@@ -3,6 +3,13 @@ events:
   - http:
       path: temperatures
       method: get
+      cors:
+        origin: '*'
+        headers:
+          - Content-Type
+          - accept
+          - apikey
+          - Control-Allow-Origin
       parameters:
         querystrings:
           location: false
