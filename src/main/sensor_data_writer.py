@@ -28,6 +28,8 @@ def handle_event(event, context):
         logger.exception(f'Something went wrong when parsing event data {e}')
     except DecimalException as e:
         logger.exception(f'Something went wrong when converting float to Decimal. {e}')
+    except TypeError as e:
+        logger.exception(f'Something went wrong. {e}')
 
 def put_item(item):
     logger.info(f'Writing new item to table/badeball-latest: {item}')
@@ -54,4 +56,6 @@ def float_to_decimal(f, num_decimals=None):
 
 def b64_to_obj(b64):
     s = base64.b64decode(b64)
-    return json.loads(s)
+    obj = json.loads(s)
+    logger.info(f'Received data: {obj}')
+    return obj
