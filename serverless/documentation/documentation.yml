@@ -1,4 +1,4 @@
-version: 0.2.15
+version: 0.2.16
 api:
   info:
     description: Api for extracting most recently measured water temperatures in Oslo.
@@ -18,11 +18,16 @@ models:
     schema: ${file(serverless/documentation/schemas/measurements.json)}
   -
     name: Temperature
-    description: Temperature measurement
+    description: Temperature measurement.
     contentType: application/json
     schema: ${file(serverless/documentation/schemas/temperature.json)}
   -
     name: Location
-    description: Location
+    description: Location.
     contentType: application/json
     schema: ${file(serverless/documentation/schemas/location.json)}
+  -
+    name: ErrorResponse
+    description: Standard error response format.
+    contentType: application/json
+    schema: ${file(serverless/documentation/schemas/standardResponse.json)}

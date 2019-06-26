@@ -3,8 +3,15 @@ queryParams:
   -
     name: location
     description: Identifier for location
+  -
+    name: sources
+    description: Filter for data sources. Comma separated string. Valid values are 'manual' and 'sensor'
 methodResponses:
   -
     statusCode: '200'
     responseModels:
       "application/json": Measurements
+  -
+    statusCode: '400'
+    responseModels:
+      "application/json": ErrorResponse

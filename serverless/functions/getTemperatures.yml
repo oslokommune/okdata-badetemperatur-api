@@ -13,4 +13,5 @@ events:
       parameters:
         querystrings:
           location: false
+          sources: false
       documentation: ${file(serverless/documentation/getTemperatures.yml)}
