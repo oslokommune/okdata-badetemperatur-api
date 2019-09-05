@@ -14,5 +14,5 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.oslo.kommune.no/origo-dataplatform/badetemperatur-api",
     packages=setuptools.find_packages(),
-    install_requires=[]
+    install_requires=[],
 )

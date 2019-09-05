@@ -1,3 +1,4 @@
+frameworkVersion: ">=1.50.0 <2.0.0"
 
 service: badetemperatur-api
 
@@ -28,7 +29,9 @@ plugins:
   - serverless-python-requirements
   - serverless-aws-documentation
   - serverless-pseudo-parameters
+
 custom:
   pythonRequirements:
     dockerizePip: non-linux
+    usePoetry: false
   documentation: ${file(serverless/documentation/documentation.yml)}
