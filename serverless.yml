@@ -13,6 +13,10 @@ provider:
   deploymentPrefix: deploy
   iamManagedPolicies:
     - arn:aws:iam::#{AWS::AccountId}:policy/badetemperatur-api-policy
+  tags:
+    GIT_REV: ${git:branch}:${git:sha1}
+  environment:
+    GIT_REV: ${git:branch}:${git:sha1}
 
 functions:
   getAllTemperatures: ${file(serverless/functions/getTemperatures.yml)}
