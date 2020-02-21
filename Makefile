@@ -9,26 +9,53 @@
 .DEV_PROFILE := saml-origo-dev
 .PROD_PROFILE := saml-dataplatform-prod
 
+GLOBAL_PY := python3.7
+BUILD_VENV ?= .build_venv
+BUILD_PY := $(BUILD_VENV)/bin/python
+
 .PHONY: init
-init:
+init: node_modules $(BUILD_VENV)
+
+node_modules: package.json package-lock.json
 	npm install
 
+$(BUILD_VENV):
+	$(GLOBAL_PY) -m venv $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U pip
+
 .PHONY: format
-format:
-	python3 -m black .
+format: $(BUILD_VENV)/bin/black
+	$(BUILD_PY) -m black .
 
 .PHONY: test
-test:
-	python3 -m tox -p auto
+test: $(BUILD_VENV)/bin/tox
+	$(BUILD_PY) -m tox -p auto -o
 
 .PHONY: deploy
-deploy: init format test login-dev
-	sls deploy --stage dev --aws-profile $(.DEV_PROFILE)
+deploy: node_modules test login-dev
+	@echo "\nDeploying to stage: $${STAGE:-dev}\n"
+	sls deploy --stage $${STAGE:-dev} --aws-profile $(.DEV_PROFILE)
 
 .PHONY: deploy-prod
-deploy-prod: init format is-git-clean test login-prod
-	sls deploy --stage prod --aws-profile $(.PROD_PROFILE) && \
-	sls --stage prod downloadDocumentation --outputFileName swagger.yaml
+deploy-prod: node_modules is-git-clean test login-prod
+	sls deploy --stage prod --aws-profile $(.PROD_PROFILE)
+
+.PHONY: download-doc
+download-doc: init login-prod
+	sls downloadDocumentation --stage prod --aws-profile $(.PROD_PROFILE) --outputFileName swagger.yaml
+
+ifeq ($(MAKECMDGOALS),undeploy)
+ifndef STAGE
+$(error STAGE is not set)
+endif
+ifeq ($(STAGE),dev)
+$(error Please do not undeploy dev)
+endif
+endif
+.PHONY: undeploy
+undeploy: login-dev
+	@echo "\nUndeploying stage: $(STAGE)\n"
+	sls remove --stage $(STAGE) --aws-profile $(.DEV_PROFILE)
 
 .PHONY: login-dev
 login-dev:
@@ -46,3 +73,22 @@ is-git-clean:
 		echo Git working directory is dirty, aborting >&2; \
 		false; \
 	fi
+
+.PHONY: build
+build: $(BUILD_VENV)/bin/wheel $(BUILD_VENV)/bin/twine
+	$(BUILD_PY) setup.py sdist bdist_wheel
+
+
+###
+# Python build dependencies
+##
+
+$(BUILD_VENV)/bin/pip-compile: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U pip-tools
+
+$(BUILD_VENV)/bin/tox: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -I virtualenv==16.7.9
+	$(BUILD_PY) -m pip install -U tox
+
+$(BUILD_VENV)/bin/%: $(BUILD_VENV)
+	$(BUILD_PY) -m pip install -U $*
