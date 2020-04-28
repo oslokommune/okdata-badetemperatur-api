@@ -27,7 +27,7 @@ package:
   exclude:
     - "**/*"
   include:
-    - "src/main/*.py"
+    - "badetemperatur_api/*.py"
     - "serverless/documentation/schemas/*.json"
 
 plugins:

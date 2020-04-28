@@ -1,7 +1,7 @@
 import unittest
-import src.main.sensor_data_writer as sensor_data_writer
-import src.test.test_data.sensor_data_writer_test_data as test_data
-from src.test.test_utils import create_table
+import badetemperatur_api.sensor_data_writer as sensor_data_writer
+import test.test_data.sensor_data_writer_test_data as test_data
+from test.test_utils import create_table
 
 from decimal import Decimal
 from moto import mock_dynamodb2

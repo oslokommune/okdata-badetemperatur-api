@@ -1,9 +1,9 @@
 import unittest
 import json
-import src.main.temperature_reader as temperature_reader
-import src.test.test_data.temperature_reader_test_data as test_data
+import badetemperatur_api.temperature_reader as temperature_reader
+import test.test_data.temperature_reader_test_data as test_data
 
-from src.test.test_utils import create_table
+from test.test_utils import create_table
 from moto import mock_dynamodb2
 
 dynamo_db_items = [
