@@ -1,4 +1,4 @@
-from src.test.test_data.test_data_utils import dynamodb_item_data, temperature_data
+from test.test_data.test_data_utils import dynamodb_item_data, temperature_data
 
 location_id_1, location_id_2 = "8171", "8172"
 

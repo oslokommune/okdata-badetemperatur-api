@@ -1,6 +1,6 @@
 import json
 import base64
-from src.test.test_data.test_data_utils import dynamodb_item_data, temperature_data
+from test.test_data.test_data_utils import dynamodb_item_data, temperature_data
 
 
 event_data_1_sensor = temperature_data("8171", "sensor")
