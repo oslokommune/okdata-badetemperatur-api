@@ -18,6 +18,7 @@ provider:
     GIT_REV: ${git:branch}:${git:sha1}
   environment:
     GIT_REV: ${git:branch}:${git:sha1}
+    ENV: ${opt:stage, 'dev'}
 
 functions:
   getAllTemperatures: ${file(serverless/functions/getTemperatures.yml)}

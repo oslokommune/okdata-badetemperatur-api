@@ -1,3 +1,4 @@
+import os
 import json
 import base64
 import boto3
@@ -41,6 +42,9 @@ def handle_event(event, context):
 
 
 def put_item(item):
+    # TODO: remove this check after BYM allows for sensordata in prod, Oyvind Nygard 2020-04-29
+    if os.environ["ENV"] == "prod" and item["name"].lower() != "manuell måling":
+        return
     logger.info(f"Writing new item to table/badeball-latest: {item}")
     response = sensor_data_table.put_item(Item=item)
     return response
