@@ -22,7 +22,7 @@ provider:
 
 functions:
   getAllTemperatures: ${file(serverless/functions/getTemperatures.yml)}
-  writeSensordata: ${file(serverless/functions/writeSensordata.yml)}
+  write_latest_measurement: ${file(serverless/functions/writeLatestMeasurement.yml)}
 
 package:
   exclude:
