@@ -5,7 +5,7 @@ Design for badetemperatur-tjeneste
 
 Det er satt opp en prototype av badetemperatur-tjeneste i
 dataplattformen. Badetemperatur-sensorene sender data til
-[Event Collector](https://github.oslo.kommune.no/origo-dataplatform/event-collector)
+[Event Collector](https://github.com/oslokommune/okdata-event-collector)
 som skriver til en Kinesis-strøm. Derfra blir temperatur-dataene
 skrevet ned i en DynamoDB-tabell. Badetemperatur-APIet leser fra
 DynamoDB og leverer sensor-dataene direkte:
@@ -55,7 +55,7 @@ generere API-nøkler her for tilgang på tjenesten.
 Vi foreslår å lage en egen mikrotjeneste `Badetemperatur Collector`
 (Lambda-funksjon) som periodisk henter de manuelt registrerte
 temperaturene fra Google-regnarket og leverer de til
-[Event Collector](https://github.oslo.kommune.no/origo-dataplatform/event-collector).
+[Event Collector](https://github.com/oslokommune/okdata-event-collector).
 
 Både denne datastrømmen og de eksisterende sensordataene må
 berikes/transformeres for å gi et felles format på
@@ -63,12 +63,12 @@ badetemperatur-dataene. Disse samles så i en felles eventstrøm.
 
 Beriking av datastrømmene gjøres via pipelines, tilsvarende hvordan
 Dataplattformen allerede prosesserer opplastede filer.
-[Pipeline Router](https://github.oslo.kommune.no/origo-dataplatform/pipeline-router)
+[Pipeline Router](https://github.com/oslokommune/okdata-pipeline-router)
 utvides for å støtte eventstrømmer, enten fra Kinesis eller SQS.
 I tillegg må det lages en `JSON Transformer` og en `JSON validator` for
 å berike/transformere og validere dataene, tilsvarende dagens
-[CSV Transformer](https://github.oslo.kommune.no/origo-dataplatform/csv-transformer)
-og [CSV Validator](https://github.oslo.kommune.no/origo-dataplatform/csv-validator).
+[CSV Transformer](https://github.com/oslokommune/okdata-pipeline-jvm/blob/main/doc/transformers/csv.md)
+og [CSV Validator](https://github.com/oslokommune/okdata-pipeline/blob/master/doc/validators/csv.md).
 
 Den felles eventstrømmen vil sendes til DynamoDB som oppbevarer siste
 avleste badetemperatur. I tillegg kan den sendes til S3 via f.eks.
