@@ -5,14 +5,14 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(
-    name="badetemperatur-api",
+    name="okdata-badetemperatur-api",
     version="0.0.1",
     author="Origo Dataplattform",
     author_email="dataplattform@oslo.kommune.no",
-    description="Lambda functions to collect and expose water-temperatures in Oslo.",
+    description="Lambda functions to collect and expose water temperatures in Oslo.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.oslo.kommune.no/origo-dataplatform/badetemperatur-api",
+    url="https://github.com/oslokommune/okdata-badetemperatur-api",
     packages=setuptools.find_packages(),
     install_requires=[],
 )
