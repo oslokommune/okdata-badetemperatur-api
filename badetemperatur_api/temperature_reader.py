@@ -43,7 +43,7 @@ def get_all_temperatures(event, context):
     response_body = list(
         filter(
             lambda item: filter_source(item, data_sources),
-            map(lambda item: from_dynamodb_format(item), temperature_item_list),
+            map(from_dynamodb_format, temperature_item_list),
         )
     )
 
