@@ -6,11 +6,9 @@ Lambda functions to collect and expose water temperatures in Oslo.
 ## Setup
 
 1. [Install Serverless Framework](https://serverless.com/framework/docs/getting-started/)
-2. Install plugins:
+2. Install dependencies
 ```
-sls plugin install -n serverless-python-requirements
-sls plugin install -n serverless-aws-documentation
-sls plugin install -n serverless-pseudo-parameters
+make init
 ```
 
 ## Running tests
@@ -18,8 +16,12 @@ sls plugin install -n serverless-pseudo-parameters
 Tests are run using [tox](https://pypi.org/project/tox/).
 
 ```
-$ tox
+$ make test
 ```
+
+## Deploy
+
+Deploy to dev is automatic via GitHub Actions, while deploy to prod can be triggered with GitHub Actions via dispatch. You can alternatively deploy from local machine (requires `saml2aws`) with: `make deploy` or `make deploy-prod`.
 
 ## Input event format
 
