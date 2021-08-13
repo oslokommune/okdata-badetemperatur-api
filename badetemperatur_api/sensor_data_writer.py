@@ -18,9 +18,9 @@ def handle_event(event, context):
     try:
         list(
             map(
-                lambda item: put_item(item),
+                put_item,
                 map(
-                    lambda record_data: to_dynamodb_format(record_data),
+                    to_dynamodb_format,
                     filter(
                         lambda record_data: bool(record_data["temperature"]),
                         map(
@@ -44,7 +44,7 @@ def handle_event(event, context):
 def put_item(item):
     # TODO: remove this check after BYM allows for sensordata in prod, Oyvind Nygard 2020-04-29
     if os.environ["ENV"] == "prod" and item["name"].lower() != "manuell måling":
-        return
+        return None
     logger.info(f"Writing new item to table/badeball-latest: {item}")
     response = sensor_data_table.put_item(Item=item)
     return response
