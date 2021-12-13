@@ -1,7 +1,7 @@
 okdata-badetemperatur-api
 =========================
 
-Lambda functions to collect and expose water temperatures in Oslo.
+Lambda functions and API to collect and expose water temperatures in Oslo.
 
 ## Setup
 
