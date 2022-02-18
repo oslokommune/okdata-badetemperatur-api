@@ -5,6 +5,7 @@ import test.test_data.temperature_reader_test_data as test_data
 
 from test.test_utils import create_table
 from moto import mock_dynamodb2
+from moto.core import patch_resource
 
 dynamo_db_items = [
     test_data.item_1_sensor,
@@ -17,7 +18,7 @@ dynamo_db_items = [
 class Tester(unittest.TestCase):
     @mock_dynamodb2
     def test_get_all_temperatures(self):
-
+        patch_resource(temperature_reader.dynamodb)
         table_name = "badetemperatur-latest"
         create_table(table_name, dynamo_db_items)
 
@@ -31,6 +32,7 @@ class Tester(unittest.TestCase):
 
     @mock_dynamodb2
     def test_get_all_temperatures_with_source_filter(self):
+        patch_resource(temperature_reader.dynamodb)
         table_name = "badetemperatur-latest"
         create_table(table_name, dynamo_db_items)
 
@@ -66,6 +68,7 @@ class Tester(unittest.TestCase):
 
     @mock_dynamodb2
     def test_get_temperature(self):
+        patch_resource(temperature_reader.dynamodb)
         temperature_reader.data_sources_default = "manual,sensor"
         table_name = "badetemperatur-latest"
         create_table(table_name, dynamo_db_items)
@@ -78,6 +81,7 @@ class Tester(unittest.TestCase):
 
     @mock_dynamodb2
     def test_query_for_item(self):
+        patch_resource(temperature_reader.dynamodb)
         table_name = "badetemperatur-latest"
         create_table(table_name, dynamo_db_items)
 
@@ -88,6 +92,7 @@ class Tester(unittest.TestCase):
 
     @mock_dynamodb2
     def test_scan_for_items(self):
+        patch_resource(temperature_reader.dynamodb)
         table_name = "badetemperatur-latest"
         create_table(table_name, dynamo_db_items)
 

@@ -5,13 +5,14 @@ from test.test_utils import create_table
 
 from decimal import Decimal
 from moto import mock_dynamodb2
+from moto.core import patch_resource
 
 
 class Tester(unittest.TestCase):
     @mock_dynamodb2
     def test_handle_event(self):
+        patch_resource(sensor_data_writer.dynamodb)
         table_name = "badetemperatur-latest"
-
         sensor_data_table = create_table(table_name)
 
         sensor_data_writer.handle_event(test_data.kinesis_event, None)
@@ -25,8 +26,8 @@ class Tester(unittest.TestCase):
 
     @mock_dynamodb2
     def test_put_item(self):
+        patch_resource(sensor_data_writer.dynamodb)
         table_name = "badetemperatur-latest"
-
         sensor_data_table = create_table(table_name)
 
         sensor_data_writer.put_item(test_data.item_1_sensor)
