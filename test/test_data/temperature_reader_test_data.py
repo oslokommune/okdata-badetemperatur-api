@@ -123,3 +123,10 @@ get_temperature_response_body = [item_1_manual_transformed, item_1_sensor_transf
 get_temperature_manual_only_response_body = [item_1_manual_transformed]
 
 get_temperature_sensor_only_response_body = [item_1_sensor_transformed]
+
+dynamo_db_items = [
+    item_1_sensor,
+    item_1_manual,
+    item_2_sensor,
+    item_2_manual,
+]

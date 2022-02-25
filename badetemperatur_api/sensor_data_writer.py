@@ -1,26 +1,26 @@
-import os
 import json
 import base64
-import boto3
 import logging
+from decimal import DecimalException
+
 from botocore.exceptions import ClientError
-from copy import deepcopy
-from decimal import Decimal, DecimalException
+
+from badetemperatur_api.temperature_table import TemperatureTable
+
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-dynamodb = boto3.resource("dynamodb", region_name="eu-west-1")
-sensor_data_table = dynamodb.Table("badetemperatur-latest")
-
 
 def handle_event(event, context):
+    temperature_table = TemperatureTable()
+
     try:
         list(
             map(
-                put_item,
+                temperature_table.put_item,
                 map(
-                    to_dynamodb_format,
+                    TemperatureTable.to_dynamodb_format,
                     filter(
                         lambda record_data: bool(record_data["temperature"]),
                         map(
@@ -39,38 +39,6 @@ def handle_event(event, context):
         logger.exception(f"Something went wrong when converting float to Decimal. {e}")
     except TypeError as e:
         logger.exception(f"Something went wrong. {e}")
-
-
-def put_item(item):
-    # TODO: remove this check after BYM allows for sensordata in prod, Oyvind Nygard 2020-04-29
-    if os.environ["ENV"] == "prod" and item["name"].lower() != "manuell måling":
-        return None
-    logger.info(f"Writing new item to table/badeball-latest: {item}")
-    response = sensor_data_table.put_item(Item=item)
-    return response
-
-
-def to_dynamodb_format(item):
-    new_item = deepcopy(item)
-    new_item["locationId"] = new_item["location"]["id"]
-    new_item["temperature"]["value"] = float_to_decimal(
-        new_item["temperature"]["value"], num_decimals=2
-    )
-    new_item["location"]["latitude"] = float_to_decimal(
-        new_item["location"]["latitude"], num_decimals=5
-    )
-    new_item["location"]["longitude"] = float_to_decimal(
-        new_item["location"]["longitude"], num_decimals=5
-    )
-    return new_item
-
-
-def float_to_decimal(f, num_decimals=None):
-    d = Decimal(str(f))
-    if num_decimals:
-        return round(d, num_decimals)
-    else:
-        return d
 
 
 def b64_to_obj(b64):
