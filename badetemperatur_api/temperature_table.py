@@ -41,17 +41,17 @@ class TemperatureTable:
         new_item.pop("locationId")
         return new_item
 
-    @staticmethod
-    def to_dynamodb_format(item):
+    @classmethod
+    def to_dynamodb_format(cls, item):
         new_item = deepcopy(item)
         new_item["locationId"] = new_item["location"]["id"]
-        new_item["temperature"]["value"] = TemperatureTable._float_to_decimal(
+        new_item["temperature"]["value"] = cls._float_to_decimal(
             new_item["temperature"]["value"], num_decimals=2
         )
-        new_item["location"]["latitude"] = TemperatureTable._float_to_decimal(
+        new_item["location"]["latitude"] = cls._float_to_decimal(
             new_item["location"]["latitude"], num_decimals=5
         )
-        new_item["location"]["longitude"] = TemperatureTable._float_to_decimal(
+        new_item["location"]["longitude"] = cls._float_to_decimal(
             new_item["location"]["longitude"], num_decimals=5
         )
         return new_item
