@@ -1,17 +1,11 @@
-import boto3
 import json
 import logging
 
-from boto3.dynamodb.conditions import Key
-from copy import deepcopy
+from badetemperatur_api.temperature_table import TemperatureTable
 
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-
-dynamodb = boto3.resource("dynamodb", region_name="eu-west-1")
-sensor_data_table = dynamodb.Table("badetemperatur-latest")
-
 
 data_sources_default = "manual"
 valid_data_sources = ["manual", "sensor"]
@@ -35,15 +29,17 @@ def get_all_temperatures(event, context):
             },
         )
 
+    temperature_table = TemperatureTable()
+
     if location:
-        temperature_item_list = query_for_item(location)
+        temperature_item_list = temperature_table.query_for_item(location)
     else:
-        temperature_item_list = scan_for_items()
+        temperature_item_list = temperature_table.scan_for_items()
 
     response_body = list(
         filter(
             lambda item: filter_source(item, data_sources),
-            map(from_dynamodb_format, temperature_item_list),
+            map(TemperatureTable.from_dynamodb_format, temperature_item_list),
         )
     )
 
@@ -57,25 +53,6 @@ def filter_source(item, sources):
         else:
             return "sensor" in sources
     return False
-
-
-def query_for_item(key):
-    item = sensor_data_table.query(KeyConditionExpression=Key("locationId").eq(key))
-    return item["Items"]
-
-
-def scan_for_items():
-    items = sensor_data_table.scan()["Items"]
-    return items
-
-
-def from_dynamodb_format(item):
-    new_item = deepcopy(item)
-    new_item["temperature"]["value"] = float(new_item["temperature"]["value"])
-    new_item["location"]["latitude"] = float(new_item["location"]["latitude"])
-    new_item["location"]["longitude"] = float(new_item["location"]["longitude"])
-    new_item.pop("locationId")
-    return new_item
 
 
 def lambda_proxy_response(status_code, response_body):

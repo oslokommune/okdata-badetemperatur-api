@@ -4,7 +4,7 @@ service: badetemperatur-api
 
 provider:
   name: aws
-  runtime: python3.7
+  runtime: python3.9
   region: ${opt:region, 'eu-west-1'}
   stage: ${opt:stage, 'dev'}
   deploymentBucket:
@@ -40,5 +40,6 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: non-linux
+    dockerImage: mlupin/docker-lambda:python3.9-build
     usePoetry: false
   documentation: ${file(serverless/documentation/documentation.yml)}
